@@ -59,9 +59,10 @@ function makepdf(club, id, res){
   var ref = firebase.database().ref();
   var base_filename = path.join(__dirname, '/generated_pdfs', club+id)
   var pdf_filename = base_filename+'.pdf';
-  ref.child(club).child(id).on("value", (snapshot, e)=>{
+  ref.on("value", (snapshot, e)=>{
     var fs = require('fs');
-    fs.writeFile(base_filename+'.json', snapshot.val(), function(err) {}); 
+    console.log(snapshot.val()[club][id]);
+    fs.writeFile(base_filename+'.json', JSON.stringify(snapshot.val()[club][id]), function(err) {});
     var prc = spawn('python', ["makepdf.py", base_filename+'.json']);
 
     //noinspection JSUnresolvedFunction
@@ -82,7 +83,7 @@ function makepdf(club, id, res){
         res.sendFile(pdf_filename);
         console.log('process exit code ' + code);
     });
-    
+
   })
 }
 
@@ -102,6 +103,13 @@ app.get('/api/getpdf/:club/:id', (req, res) => {
         console.log('Some other error: ', err.code);
     }
   });
+});
+
+app.get('/cv/:club/:id', (req, res) => {
+  res.render('cv', {
+    clubName: req.params.club,
+    id: req.params.id
+  })
 });
 
 
@@ -133,10 +141,12 @@ io.on('connection', (socket) => {
     });
   });
   socket.on('getData', (data) => {
-    socket.emit('CVData', club.cvList);
+    socket.emit('CVData', {
+      cvs: club.cvList,
+      name: club.clubName
   });
 });
-
+});
 /*
 <script src="https://www.gstatic.com/firebasejs/5.4.2/firebase.js"></script>
 <script>

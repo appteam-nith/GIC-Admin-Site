@@ -15,9 +15,30 @@ input{
   font-size: 19px;
 }
 
+#initSearch {
+  width: 200px;
+  margin-left: 40px;
+  background: #386860;
+  color: white;
+  font-size: 17px;
+  border-radius: 15px;
+  border: 3px solid #f3f3f3;
+}
+
 .row-margin {
     margin: 25px;
 }
+
+a{
+  color: black;
+  text-decoration: none;
+}
+
+a:hover{
+  text-decoration: none;
+}
+
+
 
 @font-face {
   font-family: 'Product Sans';
@@ -41,7 +62,7 @@ input{
 }
 
 .ind-card:hover{
-  background: white;
-  border: 15px solid #d1fc21;
+  background: linear-gradient(to top left, #386860, #a0c603);
+  color: white;
 }
 /**/

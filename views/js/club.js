@@ -4,19 +4,21 @@ socket.emit('getData');
 var rg = /(^\w{1}|\.\s*\w{1})/gi;
 var fullData;
 
-socket.on('CVData', function (data) {
+socket.on('CVData', function (club) {
+  var data = club.cvs;
+  var name = club.name;
   fullData = data;
   //process data
   var htmlData = `<div class="row row-margin">`, counter = 0;
   for(var i in data){
     counter++;
     htmlData += `<div class="col-md-4">
-                    <div class="card ind-card">
+                    <a href=\"/cv/${name}/${i.toLowerCase().replace(" ", "")}\"><div class="card ind-card">
                       <h4>${data[i]["Name"].replace(rg, function(toReplace) {
     return toReplace.toUpperCase();})}</h4>
                       <h5>${i.toUpperCase().replace(" ", "")}</h5>
                       <h5>${data[i]["Branch"]}</h5>
-                    </div>
+                    </div></a>
                   </div>`;
     if(counter === 3) {
       counter = 0;
@@ -53,6 +55,6 @@ return toReplace.toUpperCase();})}</h4>
     return 0;
     }
   }
-  htmlData = `<h3>Sorry, no candidate with that Roll Number</h3>`
-  jQuery('#container').empty().append(htmlData);
+  // htmlData = `<h3>Sorry, no candidate with that Roll Number</h3>`
+  // jQuery('#container').empty().append(htmlData);
 });
