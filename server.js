@@ -4,6 +4,8 @@ const firebase = require('firebase');
 const socketIO = require('socket.io');
 const path = require('path');
 const http = require('http');
+const spawn = require('child_process').spawn;
+const fs = require('fs');
 
 var app = express();
 var server = http.createServer(app);
@@ -52,6 +54,56 @@ app.get('/club', (req, res) => {
     clubName: club.clubName
   });
 });
+
+function makepdf(club, id, res){
+  var ref = firebase.database().ref();
+  var base_filename = path.join(__dirname, '/generated_pdfs', club+id)
+  var pdf_filename = base_filename+'.pdf';
+  ref.child(club).child(id).on("value", (snapshot, e)=>{
+    var fs = require('fs');
+    fs.writeFile(base_filename+'.json', snapshot.val(), function(err) {}); 
+    var prc = spawn('python', ["makepdf.py", base_filename+'.json']);
+
+    //noinspection JSUnresolvedFunction
+    prc.stdout.setEncoding('utf8');
+    prc.stdout.on('data', function (data) {
+        var str = data.toString()
+        var lines = str.split(/(\r?\n)/g);
+        console.log(lines.join(""));
+    });
+    prc.stderr.setEncoding('utf8');
+    prc.stderr.on('data', function (data) {
+        var str = data.toString()
+        var lines = str.split(/(\r?\n)/g);
+        console.log(lines.join(""));
+    });
+
+    prc.on('close', function (code) {
+        res.sendFile(pdf_filename);
+        console.log('process exit code ' + code);
+    });
+    
+  })
+}
+
+app.get('/api/getpdf/:club/:id', (req, res) => {
+  var club = req.params.club;
+  var id = req.params.id;
+  var base_filename = path.join(__dirname, '/generated_pdfs', club+id)
+  var pdf_filename = base_filename+'.pdf';
+  fs.stat(pdf_filename, function(err, stat) {
+    if(err == null) {
+        console.log('File exists');
+        res.sendFile(pdf_filename);
+    } else if(err.code == 'ENOENT') {
+        // file does not exist
+        makepdf(club,id,res);
+    } else {
+        console.log('Some other error: ', err.code);
+    }
+  });
+});
+
 
 server.listen(3000, () => {
   console.log('Port up and running');
