@@ -36,6 +36,7 @@ firebase.initializeApp(config);
 // });
 //TEMP CODE
 
+//Club info in connected server
 var club = {
   clubName: "",
   cvList: "",
@@ -48,8 +49,7 @@ app.get('/', (req, res) => {
 
 app.get('/club', (req, res) => {
   res.render('club', {
-    clubName: club.clubName,
-    htmlCV: club.htmlCV
+    clubName: club.clubName
   });
 });
 
@@ -65,20 +65,23 @@ io.on('connection', (socket) => {
     //Access Data of all the clubs
     var ref = firebase.database().ref();
     ref.on("value", (snapshot, e) => {
-      if(e) {
-        console.log(e);
-      }
-      club.clubName = clubData;
-      club.cvList = snapshot.val()[clubData];
-      renderHTML(snapshot.val()[clubData]);
-      socket.emit('redirect', {location: '/club'});
+        if(e) {
+          console.log(e);
+        }
+
+        //Check for existence of club in database
+        if(snapshot.val()[clubData] === undefined){
+          socket.emit('error1');
+          return 0;   //EXIT CODE
+        }
+
+        club.clubName = clubData;
+        club.cvList = snapshot.val()[clubData];
+        socket.emit('redirect', {location: '/club'});
+        socket.emit('CVData', club.cvList);
     });
   });
 });
-
-var renderHTML = (clubData) => {
-  console.log(clubData);
-}
 
 /*
 <script src="https://www.gstatic.com/firebasejs/5.4.2/firebase.js"></script>
