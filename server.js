@@ -78,9 +78,12 @@ io.on('connection', (socket) => {
         club.clubName = clubData;
         club.cvList = snapshot.val()[clubData];
         socket.emit('redirect', {location: '/club'});
-        socket.emit('CVData', club.cvList);
     });
   });
+  socket.on('getData', (data) => {
+    console.log(`Check`);
+    socket.emit('CVData', club.cvList);
+  })
 });
 
 /*
