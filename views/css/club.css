@@ -1,0 +1,47 @@
+.flex-container {
+    display: flex;
+    justify-content: center;
+    margin: 25px;
+}
+
+input{
+  width: 400px;
+  height: 70px;
+  border: 5px solid #f8f8f8;
+  border-radius: 45px;
+  background: #f8f8f8;
+  /* padding-left: 70px; */
+  text-align: center;
+  font-size: 19px;
+}
+
+.row-margin {
+    margin: 25px;
+}
+
+@font-face {
+  font-family: 'Product Sans';
+  font-style: normal;
+  font-weight: 500;
+  src: local('Open Sans'), local('OpenSans'), url(https://fonts.gstatic.com/s/productsans/v5/HYvgU2fE2nRJvZ5JFAumwegdm0LZdjqr5-oayXSOefg.woff2) format('woff2');
+}
+
+.ind-card {
+  min-height: 250px;
+  align-content: center;
+  text-align: center;
+  padding-top: 60px;
+  border: 15px solid white;
+  font-family: 'Product Sans';
+  font-size: 40px;
+  font-weight: bold;
+  border-radius: 25px;
+  box-shadow: 4px 4px 4px rgba(0,0,0,0.1);
+  background: linear-gradient(to bottom right, #d1fc21, #a0c603);
+}
+
+.ind-card:hover{
+  background: white;
+  border: 15px solid #d1fc21;
+}
+/**/

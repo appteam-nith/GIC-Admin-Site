@@ -81,9 +81,8 @@ io.on('connection', (socket) => {
     });
   });
   socket.on('getData', (data) => {
-    console.log(`Check`);
     socket.emit('CVData', club.cvList);
-  })
+  });
 });
 
 /*

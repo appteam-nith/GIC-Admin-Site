@@ -2,6 +2,7 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
+    <link href="https://fonts.gstatic.com/s/productsans/v5/HYvgU2fE2nRJvZ5JFAumwegdm0LZdjqr5-oayXSOefg.woff2" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="/css/club.css">
@@ -9,30 +10,35 @@
   </head>
   <body>
     <div class="flex-container">
-      <form class="form-club" action="index.html" method="post">
-        <input type="text" name="" value="" id="search" align="middle">
+      <form class="form-club">
+        <input type="text" name="" value="" placeholder="Search Roll Number" id="search" align="middle">
       </form>
+      <button type="button" name="button" id="initSearch">Search</button>
     </div>
-      <div class="container">
-        <div class="row">
-          <div class="col-md-4">
-            <div class="card ind-card">
-              frtkjkhn
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="card ind-card">
-              frtkjkhn
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="card ind-card">
-              frtkjkhn
-            </div>
-          </div>
-        </div>
+      <div class="container" id="container">
       </div>
   </body>
   <script type="text/javascript" src="/socket.io/socket.io.js"></script>
   <script type="text/javascript" src="/js/club.js"></script>
 </html>
+
+
+<!-- <div class="row row-margin">
+  <div class="col-md-4">
+    <div class="card ind-card">
+      <h4></h4>
+      <h5></h5>
+      <h5></h5>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="card ind-card">
+
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="card ind-card">
+      frtkjkhn
+    </div>
+  </div>
+</div> -->
