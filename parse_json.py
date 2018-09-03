@@ -16,11 +16,11 @@ def parse(json_str, template_str):
 
 
 	# parsed_json = json.loads(json_str)
-	# name = parsed_json["Name"]
+	details["name"] = parsed_json["Name"]
 	# mobile = str(parsed_json["Mobile"])
 	# email = parsed_json["Email"]
 	# branch = parsed_json["Branch"]
-	# roll = parsed_json["rollno"]
+	details["roll"] = parsed_json["rollno"]
 	# skills = parsed_json["Skills"]
 	# achievements = parsed_json["Achievements"]
 	# areasInt = parsed_json["Area of Interest"]
