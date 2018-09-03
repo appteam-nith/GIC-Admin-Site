@@ -97,14 +97,13 @@ def parse(json_str, template_str):
 		[Answer4]
 		\end{cvitems}
 	}
-	
+
 	\end{cventries}
 	"""
 
-# "Why should we select you?"
 	template_str = template_str.replace("[content]",x)
 	template_str = template_str.replace("[skills]",skills_str)
-	template_str = template_str.replace("[skills]",skills_str)
+
 	template_str = template_str.replace("AreasOfInt",InterestAreas)
 	template_str = template_str.replace("[interest]",interest_str)
 
@@ -121,6 +120,7 @@ def parse(json_str, template_str):
 	template_str = template_str.replace("[Answer4]",answer4)
 
 	template_str = template_str.replace("[achievements]",achievements_str)
+	
 	template_str = template_str.replace("[firstname]",name)
 	template_str = template_str.replace("[lastname]", "")
 	template_str = template_str.replace("[mobile]", mobile)

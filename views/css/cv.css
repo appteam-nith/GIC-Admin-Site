@@ -2,11 +2,42 @@
   margin-top: 400px;
 }
 
+h3 {
+  font-family: 'Lato';
+}
+
+/* @font-face {
+  font-family: 'Lato';
+  font-style: normal;
+  font-weight: 500;
+  src: local('Open Sans'), local('OpenSans'), url(https://fonts.gstatic.com/s/productsans/v5/HYvgU2fE2nRJvZ5JFAumwegdm0LZdjqr5-oayXSOefg.woff2) format('woff2');
+} */
+
+textarea {
+  border: 5px solid #f8f8f8;
+  border-radius: 45px;
+  background: #f8f8f8;
+  /* padding-left: 70px; */
+  padding-left: 40px;
+  padding-right: 40px;
+  font-size: 19px;
+}
+
 .submitButt {
   margin-top: 45px;
   margin-left: 180px;
+  width: 120px;
+  height: 50px;
+  background: white;
+  color: black;
+  font-size: 21px;
+  box-shadow: 4px 4px 4px rgba(0,0,0,0.1);;
+  border-radius: 25px;
+  border: none;
 }
 
+
+/*Slider Code*/
 .slider {
   width: 320px;
   margin-left: 100px;
@@ -124,7 +155,7 @@ html {
 }
 body {
   min-height: 100vh;
-  font-family: Roboto, Arial;
+  font-family: 'Lato';
   color: #adafb6;
   display: flex;
   justify-content: center;

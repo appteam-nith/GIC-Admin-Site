@@ -1,0 +1,27 @@
+@import "compass/css3";
+
+$main-color: #f8f8f8;
+
+body{
+  background: #ffffff;
+  color: #FFF;
+}
+
+.skewed-bg{
+  background: $main-color;
+  padding: 100px 0;
+  @include transform(skew(0deg, -6deg));
+  margin-top: 100px;
+
+
+  .content{
+    @include transform(skew(0deg, 5deg));
+    text-align: center;
+
+  }
+}
+
+.footer{
+  @include transform(skew(0deg, 10deg));
+
+}
