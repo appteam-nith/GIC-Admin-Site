@@ -1,0 +1,38 @@
+body{
+	margin: 0;
+	padding: 0;
+}
+.sec1,
+.sec3
+{
+	height: 200px;
+	width: 100%;
+}
+.sec1{
+	background: #ffffff;
+	position: relative;
+}
+.sec2{
+	background: #f8f8f8;
+	position: relative;
+	height: 500px;
+}
+.sec3{
+	background: #ffffff;
+	position: relative;
+}
+.sec2:before{
+	content: '';
+	position: absolute;
+	border-bottom: 100px solid #f8f8f8;
+	border-left: 98.8vw solid transparent;
+	top: -100px;
+}
+.sec2:after{
+	content: '';
+	position: absolute;
+	border-top: 100px solid #f8f8f8;
+	border-right: 98.8vw solid transparent;
+	bottom: -100px;
+	z-index: 1;
+}
