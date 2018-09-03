@@ -6,6 +6,7 @@ const path = require('path');
 const http = require('http');
 const spawn = require('child_process').spawn;
 const fs = require('fs');
+const crypto = require('crypto');;
 
 var app = express();
 var server = http.createServer(app);
@@ -44,6 +45,11 @@ var club = {
   cvList: "",
   htmlCV: "",
   currentUser: ""
+}
+
+var password = {
+  englishclub: "40d6d32f29d78b185443b75544e5cff9bae81e2dbfd7c9c9799e94333d36063d",
+  appteam: "c7a099afc459faf474bebbacd7b55b1a6506ef83aa7bd629223b820bb5eac643"
 }
 
 app.get('/', (req, res) => {
@@ -85,8 +91,7 @@ function makepdf(club, id, res){
         res.sendFile(pdf_filename);
         console.log('process exit code ' + code);
     });
-
-  })
+  });
 }
 
 app.get('/api/getpdf/:club/:id', (req, res) => {
@@ -109,6 +114,7 @@ app.get('/api/getpdf/:club/:id', (req, res) => {
 
 app.get('/cv/:club/:id', (req, res) => {
   club.currentUser = req.params.id;
+  console.log(club);
   res.render('cv', {
     clubName: req.params.club,
     id: req.params.id
@@ -123,6 +129,10 @@ server.listen(3000, () => {
 //SOCKET EVENTS
 io.on('connection', (socket) => {
   socket.on('input', (clubData) => {
+    [clubData, pass]   = clubData.split(';')
+    var hashedPassword = crypto.createHmac('sha256', 'dontmesswithusbitch')
+                                .update(pass)
+                                .digest('hex');
     clubData = clubData.toLowerCase().replace(" ", "");       //Formatting Club Name
 
     //Access Data of all the clubs
@@ -140,7 +150,11 @@ io.on('connection', (socket) => {
 
         club.clubName = clubData;
         club.cvList = snapshot.val()[clubData];
-        socket.emit('redirect', {location: '/club'});
+        if(hashedPassword === password[club.clubName]){
+          socket.emit('redirect', {location: '/club'});
+        } else {
+          socket.emit('wrongPassword')
+        }
     });
   });
   socket.on('getData', (data) => {
@@ -155,19 +169,31 @@ io.on('connection', (socket) => {
     ref.on("value", (snapshot, e) => {
       currentUserData = snapshot.val();
     });
+
+    var keys = ["Name", "Mobile", "Email", "Branch", "Skills", "Achievements", "Area of Interest", "Ques1", "Ques2", "Ques3", "Ques4"];
+    for(var key in keys){
+      console.log(keys[key]);
+      if(!currentUserData.hasOwnProperty(keys[key])) {
+        currentUserData[keys[key]] = "";
+      }
+    }
+    currentUserData["rating"] = data.rating;
+    currentUserData["comments"] = data.comments;
+    var id = club.currentUser
     ref.set({
-      Achievements : currentUserData.Achievements,
-      Branch : currentUserData.Branch,
-      Email : currentUserData.Email,
-      Mobile : currentUserData.Mobile,
-      Name : currentUserData.Name,
-      Ques1 : currentUserData.Ques1,
-      Ques2 : currentUserData.Ques2,
-      Ques3 : currentUserData.Ques3,
-      Ques4 : currentUserData.Ques4,
-      Skills : currentUserData.Skills,
-      "Area of Interest" : currentUserData["Area of Interest"],
-      rating: data
+      Achievements: currentUserData.Achievements,
+      Name: currentUserData.Name,
+      Mobile: currentUserData.Mobile,
+      Email: currentUserData.Email,
+      Branch: currentUserData.Branch,
+      Skills: currentUserData.Skills,
+      Ques1: currentUserData.Ques1,
+      Ques2: currentUserData.Ques2,
+      Ques3: currentUserData.Ques3,
+      Ques4: currentUserData.Ques4,
+      rating: currentUserData.rating,
+      comments: currentUserData.comments,
+      "Area of Interest": currentUserData["Area of Interest"]
     });
   });
 });

@@ -11,7 +11,7 @@ def parse(json_str, template_str):
 	details = {}
 
 	for item in nonrequired_items:
-		if item in parsed_json:
+		if item in parsed_json and parsed_json[item] != "":
 			details[item] = parsed_json[item]
 		else:
 			details[item] = "Not Entered"

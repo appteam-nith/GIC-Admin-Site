@@ -29,5 +29,9 @@ function setPathData(path, value) {
 
 
 $('#submit').on('click', function () {
-  socket.emit('rating', finalVal);
+  var comments = jQuery('#comments').val();
+  var rating = finalVal;
+  socket.emit('rating', {rating, comments});
+
+  window.location.href="/club"
 });
