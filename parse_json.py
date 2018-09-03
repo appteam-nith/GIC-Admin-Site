@@ -120,7 +120,7 @@ def parse(json_str, template_str):
 	template_str = template_str.replace("[Answer4]",answer4)
 
 	template_str = template_str.replace("[achievements]",achievements_str)
-	
+
 	template_str = template_str.replace("[firstname]",name)
 	template_str = template_str.replace("[lastname]", "")
 	template_str = template_str.replace("[mobile]", mobile)
