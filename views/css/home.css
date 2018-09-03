@@ -1,4 +1,4 @@
-@import "compass/css3";
+/* @import "compass/css3";
 
 body{
   background: #ffffff;
@@ -31,4 +31,87 @@ body{
 .footer{
   @include transform(skew(0deg, 10deg));
 
+} */
+
+body{
+	margin: 0;
+	padding: 0;
+}
+.sec1,
+.sec3
+{
+	height: 200px;
+	width: 100%;
+}
+.sec1{
+	background: #ffffff;
+	position: relative;
+}
+.sec2{
+	background: #f8f8f8;
+	position: relative;
+	height: 500px;
+  padding-bottom: 400px;
+}
+.sec3{
+	background: #ffffff;
+	position: relative;
+}
+.sec2:before{
+	content: '';
+	position: absolute;
+	border-bottom: 100px solid #f8f8f8;
+	border-left: 98.8vw solid transparent;
+	top: -100px;
+}
+.sec2:after{
+	content: '';
+	position: absolute;
+	border-top: 100px solid #f8f8f8;
+	border-right: 98.8vw solid transparent;
+	bottom: -100px;
+	z-index: 1;
+}
+
+.cardForInput {
+    /* background: linear-gradient(to top right, #d1fc21, #a0c603);
+    border
+    width: 300px;
+    border: 25px solid green;
+    padding: 25px;
+    text-align:center;*/
+    margin-top: 50px;
+    margin-left: 650px;
+    position: absolute;
+    min-height: 350px;
+    align-content: center;
+    text-align: center;
+    width: 550px;
+    padding-top: 60px;
+    border: 15px solid white;
+    font-size: 40px;
+    border-radius: 25px;
+    box-shadow: 4px 4px 4px rgba(0,0,0,0.1);
+    background: linear-gradient(to bottom right, #2dfae5, #05d8c2);
+}
+input {
+  width: 370px;
+  margin-bottom: 30px;
+  font-size: 28px;
+  border-radius: 25px;
+  padding-left: 20px;
+  padding-right: 20px;
+  border: none;
+  box-shadow: 4px 4px 4px rgba(0,0,0,0.1);
+}
+
+#submit {
+  margin-top: 20px;
+  font-size: 31px;
+  width: 160px;
+  background: white;
+  box-shadow: 4px 4px 4px rgba(0,0,0,0.1);
+  border-radius: 25px;
+  border: none;
+  margin-bottom: 20px;
 }
