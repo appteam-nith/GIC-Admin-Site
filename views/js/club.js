@@ -40,21 +40,28 @@ socket.on('CVData', function (club) {
 
 jQuery('#initSearch').on('click', function() {
   var roll = jQuery('#search').val();
+  var htmlData = `<div class="row row-margin">`;
+  var data = fullData;
   for(var i in fullData) {
     if(roll == i){
-      console.log(fullData[i]);
-      htmlData = `<div class="row row-margin">
-      <div class="card ind-card">
-        <h4>${fullData[i]["Name"].replace(rg, function(toReplace) {
-return toReplace.toUpperCase();})}</h4>
-        <h5>${i.toUpperCase().replace(" ", "")}</h5>
-        <h5>${fullData[i]["Branch"]}</h5>
-      </div>
-    </div>`;
-    jQuery('#container').empty().append(htmlData);
-    return 0;
+
+      htmlData += `<div class="col-md-4">
+                      <a href=\"/cv/${name}/${i.toLowerCase().replace(" ", "")}\"><div class="card ind-card">
+                        <h4>${data[i]["Name"].replace(rg, function(toReplace) {
+      return toReplace.toUpperCase();})}</h4>
+                        <h5>${i.toUpperCase().replace(" ", "")}</h5>
+                        <h5>${data[i]["Branch"]}</h5>
+                      </div></a>
+                    </div>`;
+
+
+    //return 0;
     }
   }
+  console.log(htmlData)
+  htmlData += `</div>`;
+  console.log(htmlData)
+  jQuery('#container').empty().append(htmlData);
   // htmlData = `<h3>Sorry, no candidate with that Roll Number</h3>`
   // jQuery('#container').empty().append(htmlData);
 });
