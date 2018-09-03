@@ -42,7 +42,8 @@ firebase.initializeApp(config);
 var club = {
   clubName: "",
   cvList: "",
-  htmlCV: ""
+  htmlCV: "",
+  currentUser: ""
 }
 
 app.get('/', (req, res) => {
@@ -61,8 +62,9 @@ function makepdf(club, id, res){
   var pdf_filename = base_filename+'.pdf';
   ref.on("value", (snapshot, e)=>{
     var fs = require('fs');
-    console.log(snapshot.val()[club][id]);
-    fs.writeFile(base_filename+'.json', JSON.stringify(snapshot.val()[club][id]), function(err) {});
+    var json_obj = snapshot.val()[club][id];
+    json_obj['rollno'] = id;
+    fs.writeFile(base_filename+'.json', JSON.stringify(json_obj), function(err) {});
     var prc = spawn('python', ["makepdf.py", base_filename+'.json']);
 
     //noinspection JSUnresolvedFunction
@@ -106,6 +108,7 @@ app.get('/api/getpdf/:club/:id', (req, res) => {
 });
 
 app.get('/cv/:club/:id', (req, res) => {
+  club.currentUser = req.params.id;
   res.render('cv', {
     clubName: req.params.club,
     id: req.params.id
@@ -144,8 +147,29 @@ io.on('connection', (socket) => {
     socket.emit('CVData', {
       cvs: club.cvList,
       name: club.clubName
+    });
   });
-});
+  socket.on('rating', (data) => {
+    var currentUserData;
+    var ref = firebase.database().ref(`/${club.clubName}/${club.currentUser}`);
+    ref.on("value", (snapshot, e) => {
+      currentUserData = snapshot.val();
+    });
+    ref.set({
+      Achievements : currentUserData.Achievements,
+      Branch : currentUserData.Branch,
+      Email : currentUserData.Email,
+      Mobile : currentUserData.Mobile,
+      Name : currentUserData.Name,
+      Ques1 : currentUserData.Ques1,
+      Ques2 : currentUserData.Ques2,
+      Ques3 : currentUserData.Ques3,
+      Ques4 : currentUserData.Ques4,
+      Skills : currentUserData.Skills,
+      "Area of Interest" : currentUserData["Area of Interest"],
+      rating: data
+    });
+  });
 });
 /*
 <script src="https://www.gstatic.com/firebasejs/5.4.2/firebase.js"></script>

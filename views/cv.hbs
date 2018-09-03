@@ -3,21 +3,43 @@
   <head>
     <meta charset="utf-8">
     <link href="https://fonts.gstatic.com/s/productsans/v5/HYvgU2fE2nRJvZ5JFAumwegdm0LZdjqr5-oayXSOefg.woff2" rel="stylesheet">
+    <link rel="stylesheet" href="/css/cv.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,500,700">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
     <title>CV</title>
   </head>
   <body>
     <div class="container-fluid">
       <div class="row">
-        <div class="col-md-2">
-
+        <div class="col-md-2 col-xs-2 rate">
+          <!-- <input type="range" min="1" max="10"> -->
+          <h3 style="margin-left: 100px;"></h3>
+          <div class="slider">
+              <div class="ui-slider-handle">
+                  <div class="smiley">
+                      <svg viewBox="0 0 34 10" version="1.1">
+                          <path d=""></path>
+                      </svg>
+                  </div>
+              </div>
+              <div class="text">
+                  <span><h3>Overall Rating</h3></span>
+                  <strong>-</strong>
+              </div>
+          </div>
+          <button id="submit" class="btn btn-primary submitButt">Submit</button>
         </div>
-        <div class="col-md-10">
-          <embed src="/api/getpdf/{{clubName}}/{{id}}" align="right" width="1200" height="900" id="pdf" type='application/pdf'>
+        <div class="col-md-10 col-xs-10">
+          <embed src="/api/getpdf/{{clubName}}/{{id}}#toolbar=0&navpanes=0&scrollbar=0&zoom=150" align="right" width="1300" height="980" id="pdf" type='application/pdf'>
         </div>
       </div>
     </div>
     </body>
-    <script type="text/javascript" src="cv.js"></script>
+    <script type="text/javascript" src="/socket.io/socket.io.js"></script>
+    <script type="text/javascript" src="/js/cv.js"></script>
 </html>
+
+<!-- zoom=140&navpanes=0 -->
