@@ -1,6 +1,8 @@
 var socket = io();
 var step = 10;
-var finalVal = 1
+var finalVal = 1;
+
+// document.body.style.zoom = "250%"
 
 
 $(".slider").each(function() {

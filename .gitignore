@@ -1,3 +1,4 @@
 /node_modules
 generated_pdfs
 *__pycache__*
+passwords.txt
