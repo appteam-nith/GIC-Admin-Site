@@ -130,8 +130,11 @@ app.get('/', (req, res) => {
 });
 
 app.get('/club', (req, res) => {
+  var rg = /(^\w{1}|\.\s*\w{1})/gi;
+  var formattedName = club.clubName.replace(rg, function(toReplace) {
+return toReplace.toUpperCase();})
   res.render('club', {
-    clubName: club.clubName
+    clubName: formattedName
   });
 });
 
