@@ -3,7 +3,7 @@
 ### Prequisites to run the server:
 
 1. Node and npm, express globally
-2. Python-3 support and Anaconda should installed
+2. Python-3 support and Anaconda should be installed
 3. LaTex Modules: texlive-base, texlive-xetex, texlive-fonts-extra
 
 ### Prerequisites to run the web-site:
