@@ -20,15 +20,7 @@ app.set('view engine', 'hbs');
 //TEMPLATING COMPLETE
 
 //FIREBASE linking Code
-var config = {
-  apiKey: "AIzaSyCVVTN_RpuWY8N1bmvlm3ioIM7hzLttwk0",
-  authDomain: "getintoclub-1234.firebaseapp.com",
-  databaseURL: "https://getintoclub-1234.firebaseio.com",
-  projectId: "getintoclub-1234",
-  storageBucket: "getintoclub-1234.appspot.com",
-  messagingSenderId: "198631292821"
-};
-firebase.initializeApp(config);
+// Ask for config info
 //LINK COMPLETE
 
 //Club info in connected server
