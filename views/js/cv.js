@@ -1,6 +1,8 @@
 var socket = io();
 var step = 10;
-var finalVal = 1;
+var finalVal = 1
+
+
 $(".slider").each(function() {
     var self = $(this);
     var slider = self.slider({
